@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="prodlist">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>Valor</th>
+          <th>Imagem</th>
+          <th>Quantidade</th>
+          <th>Descrição</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produto of listaprodutos">
+          <td>{{ produto.codigo }}</td>
+          <td>{{ produto.nome }}</td>
+          <td>{{ produto.valor | currency: 'BRL': true }}</td>
+          <td>{{ produto.imagem }}</td>
+          <td>{{ produto.quantidade }}</td>
+          <td>{{ produto.descricao }}</td>
+          <td>
+            <button type="button" class="btn btn-info" (click)="Editar(produto)">Editar</button>
+            <button type="button" class="btn btn-danger" (click)="Deletar(produto._id)">Deletar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-right">
+      <button type="submit" class="btn btn-primary" (click)="Novo()">Novo</button>
+    </div>
+  </div>
+  <br>
+
+
+  <div class="regentry" *ngIf="isNovo">
+
+    {{form.valid}}
+    {{form.value | json}}
+
+    <form #form="ngForm" (ngSubmit)="Salvar()" novalidate>
+
+      <!-- <app-input-container label="Código">
+        <input type="number" class="form-control" name="codigo" ngModel required autocomplete="off">
+      </app-input-container> -->
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Código</label>
+        <div class="col-2" [class.has-success]="inputCodigo.valid && (inputCodigo.dirty || inputCodigo.touched)"
+                           [class.has-danger]="!inputCodigo.valid && (inputCodigo.dirty || inputCodigo.touched)">
+
+          <input class="form-control" [class.form-control-success]="inputCodigo.valid && (inputCodigo.dirty || inputCodigo.touched)"
+                                       [class.form-control-danger]="!inputCodigo.valid && (inputCodigo.dirty || inputCodigo.touched)"
+           #inputCodigo="ngModel" type="number" [(ngModel)]="prodModel.codigo" name="codigo" required autocomplete="off">
+
+          <small class="form-control-feedback" *ngIf="!inputCodigo.valid && (inputCodigo.dirty || inputCodigo.touched)">Campo Obrigatório</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Nome</label>
+        <div class="col-10" [class.has-success]="inputNome.valid && (inputNome.dirty || inputNome.touched)"
+                            [class.has-danger]="!inputNome.valid && (inputNome.dirty || inputNome.touched)">
+          <input class="form-control" [class.form-control-success]="inputNome.valid && (inputNome.dirty || inputNome.touched)"
+                                      [class.form-control-danger]="!inputNome.valid && (inputNome.dirty || inputNome.touched)"
+           #inputNome="ngModel" type="text" [(ngModel)]="prodModel.nome" name="nome" required autocomplete="off">
+          <small class="form-control-feedback" *ngIf="!inputNome.valid && (inputNome.dirty || inputNome.touched)">Campo Obrigatório</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Imagem</label>
+        <div class="col-10" [class.has-success]="inputImagem.valid && (inputImagem.dirty || inputImagem.touched)"
+                            [class.has-danger]="!inputImagem.valid && (inputImagem.dirty || inputImagem.touched)">
+          <input class="form-control" [class.form-control-success]="inputImagem.valid && (inputImagem.dirty || inputImagem.touched)"
+                                      [class.form-control-danger]="!inputImagem.valid && (inputImagem.dirty || inputImagem.touched)"
+            #inputImagem="ngModel" type="text" [(ngModel)]="prodModel.imagem" name="imagem" placeholder="Informe o caminho da imagem"
+            required autocomplete="off"> <!-- accept="image/*" (change)="getFiles($event)" -->
+          <small class="form-control-feedback" *ngIf="!inputImagem.valid && (inputImagem.dirty || inputImagem.touched)">Campo Obrigatório</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Valor</label>
+        <div class="col-2" [class.has-success]="inputValor.valid && (inputValor.dirty || inputValor.touched)"
+                            [class.has-danger]="!inputValor.valid && (inputValor.dirty || inputValor.touched)">
+          <input class="form-control" [class.form-control-success]="inputValor.valid && (inputValor.dirty || inputValor.touched)"
+                                      [class.form-control-danger]="!inputValor.valid && (inputValor.dirty || inputValor.touched)"
+          #inputValor="ngModel" type="number" [(ngModel)]="prodModel.valor" name="valor" required autocomplete="off">
+          <small class="form-control-feedback" *ngIf="!inputValor.valid && (inputValor.dirty || inputValor.touched)">Campo Obrigatório</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Quantidade</label>
+        <div class="col-2" [class.has-success]="inputQuantidade.valid && (inputQuantidade.dirty || inputQuantidade.touched)"
+                            [class.has-danger]="!inputQuantidade.valid && (inputQuantidade.dirty || inputQuantidade.touched)">
+          <input class="form-control" [class.form-control-success]="inputQuantidade.valid && (inputQuantidade.dirty || inputQuantidade.touched)"
+                                      [class.form-control-danger]="!inputQuantidade.valid && (inputQuantidade.dirty || inputQuantidade.touched)"
+          #inputQuantidade="ngModel" type="number" [(ngModel)]="prodModel.quantidade" name="quantidade" required autocomplete="off">
+          <small class="form-control-feedback" *ngIf="!inputQuantidade.valid && (inputQuantidade.dirty || inputQuantidade.touched)">Campo Obrigatório</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Descrição</label>
+        <div class="col-10" [class.has-success]="inputDescricao.valid && (inputDescricao.dirty || inputDescricao.touched)"
+                            [class.has-danger]="!inputDescricao.valid && (inputDescricao.dirty || inputDescricao.touched)">
+          <input class="form-control" [class.form-control-success]="inputDescricao.valid && (inputDescricao.dirty || inputDescricao.touched)"
+                                      [class.form-control-danger]="!inputDescricao.valid && (inputDescricao.dirty || inputDescricao.touched)"
+          #inputDescricao="ngModel" type="text" [(ngModel)]="prodModel.descricao" name="descricao" required autocomplete="off">
+          <small class="form-control-feedback" *ngIf="!inputDescricao.valid && (inputDescricao.dirty || inputDescricao.touched)">Campo Obrigatório</small>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success" [disabled]="!form.valid">{{tipoOperacao}}</button>
+      <button type="submit" class="btn btn-primary" (click)="Cancelar()">Cancelar</button>
+    </form>
+  </div>
+</div>

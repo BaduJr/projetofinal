@@ -1,0 +1,16 @@
+<div class="form-group row">
+  <label class="col-2 col-form-label">{{label}}</label>
+  <div class="col-2" [class.has-success]="input.valid && (input.dirty || input.touched)"
+                     [class.has-danger]="!input.valid && (input.dirty || input.touched)">
+
+    <ng-content></ng-content>
+
+    <small class="form-control-feedback" *ngIf="!input.valid && (input.dirty || input.touched)">Campo Obrigatório</small>
+  </div>
+</div>
+<!-- [(ngModel)]="prodModel.codigo" -->
+<!--  <input class="form-control" [class.form-control-success]="inputCodigo.valid && (inputCodigo.dirty || inputCodigo.touched)"
+                              [class.form-control-danger]="!inputCodigo.valid && (inputCodigo.dirty || inputCodigo.touched)"
+  #inputCodigo="ngModel" type="number" ngModel name="codigo" required autocomplete="off">
+<small class="form-control-feedback" *ngIf="!input.valid && (input.dirty || input.touched)">Campo Obrigatório</small>
+-->

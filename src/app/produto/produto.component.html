@@ -35,10 +35,6 @@
 
 
   <div class="regentry" *ngIf="isNovo">
-
-    {{form.valid}}
-    {{form.value | json}}
-
     <form #form="ngForm" (ngSubmit)="Salvar()" novalidate>
 
       <!-- <app-input-container label="Código">

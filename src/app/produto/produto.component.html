@@ -76,7 +76,7 @@
           <input class="form-control" [class.form-control-success]="inputImagem.valid && (inputImagem.dirty || inputImagem.touched)"
                                       [class.form-control-danger]="!inputImagem.valid && (inputImagem.dirty || inputImagem.touched)"
             #inputImagem="ngModel" type="text" [(ngModel)]="prodModel.imagem" name="imagem" placeholder="Informe o caminho da imagem"
-            required autocomplete="off"> <!-- accept="image/*" (change)="getFiles($event)" -->
+            required autocomplete="off">
           <small class="form-control-feedback" *ngIf="!inputImagem.valid && (inputImagem.dirty || inputImagem.touched)">Campo Obrigatório</small>
         </div>
       </div>

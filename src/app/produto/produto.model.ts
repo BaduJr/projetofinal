@@ -1,10 +1,10 @@
 export class Produto{
-  nome: string = '',
-  codigo: number = '',
-  valor: number = 0,
-  imagem: string = '',
-  quantidade: number = 0,
-  descricao: string = '',
+  nome: string
+  codigo: number
+  valor: number
+  imagem: string
+  quantidade: number
+  descricao: string
   _id: string
 
   constructor() {}

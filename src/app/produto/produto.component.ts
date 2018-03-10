@@ -36,6 +36,7 @@ export class ProdutoComponent implements OnInit {
       this.produtoService.Alterar(this.prodModel);
     }
 
+    window.location.reload();
     this.isNovo = false;
   }
 
@@ -48,10 +49,10 @@ export class ProdutoComponent implements OnInit {
 
   Deletar(id: string) {
     this.produtoService.Excluir(id);
+    window.location.reload();
   }
 
   Cancelar() {
     this.isNovo = false;
   }
-
 }

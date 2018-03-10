@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Http, HttpModule, Response, Headers, RequestOptions } from '@angular/http'
-import { Produto } from './produto/produto.model'
+import { Produto } from './produto.model';
 import { PRODUTO_API } from '../app.api'
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map'
@@ -11,7 +11,7 @@ export class ProdutoService{
 
     constructor(private http: Http){}
 
-    ObterListaProdutos(): Observable<Produto>{
+    ObterListaProdutos(): Observable<Produto[]>{
       const url = `${PRODUTO_API}/produto`;
 
       return this.http.get(url)

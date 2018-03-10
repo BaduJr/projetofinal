@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Produto } from './produto.model';
 import { ProdutoService } from './produto.service';
 import { FormGroup, FormControl, Validators, FormsModule } from '@angular/forms';
@@ -10,7 +10,7 @@ import { FormGroup, FormControl, Validators, FormsModule } from '@angular/forms'
 })
 
 export class ProdutoComponent implements OnInit {
-  listaprodutos: Produto[];
+  @Input() listaprodutos: Produto[];
   prodModel: Produto;
   isNovo: Boolean = false;
   tipoOperacao: string = 'Salvar';
@@ -18,8 +18,7 @@ export class ProdutoComponent implements OnInit {
   constructor(private produtoService : ProdutoService) {}
 
   ngOnInit() {
-     this.produtoService.ObterListaProdutos()
-      .subscribe(listaprodutos => this.listaprodutos = listaprodutos);
+     this.produtoService.ObterListaProdutos().subscribe(listaprodutos => this.listaprodutos = listaprodutos);
   }
 
   Novo() {

@@ -7,5 +7,4 @@ export class Produto{
   descricao: string
   _id: string
 
-  constructor() {}
 }

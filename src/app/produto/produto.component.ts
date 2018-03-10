@@ -54,9 +54,4 @@ export class ProdutoComponent implements OnInit {
     this.isNovo = false;
   }
 
-  getFiles(event){
-        console.log(event.target.files[0].name);
-        this.prodModel.imagem = event.target.files[0].name;
-  }
-
 }
